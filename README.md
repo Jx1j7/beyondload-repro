@@ -52,7 +52,7 @@ python3.11 -m venv .venv
 .venv/bin/python code/experiments/build_competition_appendix_cpu.py
 ```
 
-The new scripts write outside the original `experiments/results.csv`. For the archived hourly results, `code/experiments/recalculate_metrics_cpu.py` derives corrected scaled scores from the retained aggregate MAE and freshly prepared target series. It does **not** re-run or validate historical model checkpoints.
+The new scripts write outside the original `experiments/results.csv`. For the archived hourly results, `code/experiments/recalculate_metrics_cpu.py` derives corrected scaled scores from the retained aggregate MAE and freshly prepared target series. It does **not** re-run or validate historical model checkpoints. Exact reconstruction of the old multi-model sweep is limited because resolved checkpoint revisions and reliable first-run timestamps were not recorded per result; the new four-arm experiment has its own pinned revision and point forecasts.
 
 ## Protocol and limits
 
