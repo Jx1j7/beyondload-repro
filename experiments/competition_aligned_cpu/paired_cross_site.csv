@@ -1,0 +1,9 @@
+track,model,arm,mean_mase,sites
+solar,Chronos-2,calendar,0.7201049940513075,3
+solar,Chronos-2,weather,0.6488608750406006,3
+solar,LightGBM,calendar,0.7979077294505492,3
+solar,LightGBM,weather,0.5729274056958366,3
+wind,Chronos-2,calendar,0.812585874131004,10
+wind,Chronos-2,weather,0.6476899114330185,10
+wind,LightGBM,calendar,0.8172171025802193,10
+wind,LightGBM,weather,0.47739834673282644,10

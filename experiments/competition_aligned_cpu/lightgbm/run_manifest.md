@@ -1,0 +1,143 @@
+# LightGBM competition-aligned CPU manifest
+
+- Started UTC: 2026-11-04T07:32:17.379742+00:00
+- Finished UTC: 2026-11-04T07:37:41.124079+00:00
+- Python: 3.11.15; LightGBM: 4.7.0
+- Host: macOS-15.6-arm64-arm-64bit
+- Source script SHA-256: `acbf734cac72f08460649e7a1fd7b6fbbda392ac63e01f1bcc71b49128d57465`
+- Candidate origins SHA-256: `c187ca1cde7d8876f9255f28e36f4b99fb3962ffc62e89721122751c698f420e`
+- Both arms: target lags and future-known calendar; weather arm also uses target-hour NWP. Hyperparameters, training rows, and early stopping follow the archived LightGBM runner.
+- All test windows are common to both arms and Chronos-2. Issue time is inferred from the competition schedule; original `results.csv` untouched.
+
+| Dataset | Arm | Seed | Origins | Best iteration | CPU seconds | File | SHA-256 |
+|---|---|---:|---:|---:|---:|---|---|
+| gefcom2014_solar_zone1 | calendar | 0 | 157 | 135 | 2.39 | `gefcom2014_solar_zone1_calendar_seed0_points.csv` | `6c94b682d1a1a7a2d1555f03c2b4f831f7eb3b2e5c2d81e522eaaf6c06d18764` |
+| gefcom2014_solar_zone1 | calendar | 1 | 157 | 119 | 2.29 | `gefcom2014_solar_zone1_calendar_seed1_points.csv` | `e0e458353cd422b197a84c1d247f96a235a5c7a8079428a56a5fb8dfab0ff3a0` |
+| gefcom2014_solar_zone1 | calendar | 2 | 157 | 98 | 2.04 | `gefcom2014_solar_zone1_calendar_seed2_points.csv` | `607051a23a0715ac5dbcfb1575f39a267027138ca1142da3565ef645b0148a04` |
+| gefcom2014_solar_zone1 | calendar | 3 | 157 | 134 | 2.34 | `gefcom2014_solar_zone1_calendar_seed3_points.csv` | `6547ac2f38aecb6475d8c935ea779bfc70ac4723223697f63aaf45b629a56b08` |
+| gefcom2014_solar_zone1 | calendar | 4 | 157 | 128 | 2.11 | `gefcom2014_solar_zone1_calendar_seed4_points.csv` | `d1d063abf4a4416a4417669b59bc6247badf9284df6dc02d1a894be8034fd047` |
+| gefcom2014_solar_zone1 | weather | 0 | 157 | 116 | 2.26 | `gefcom2014_solar_zone1_weather_seed0_points.csv` | `9582a0032277b96a15fc8219150ac06b1e1f427707f79a731c827f7c8e81a8b0` |
+| gefcom2014_solar_zone1 | weather | 1 | 157 | 111 | 2.37 | `gefcom2014_solar_zone1_weather_seed1_points.csv` | `46550f0816b8fa2055ffc0428c5ea11cb2888c220aeae9f7389d4c0f997c7b5b` |
+| gefcom2014_solar_zone1 | weather | 2 | 157 | 106 | 1.98 | `gefcom2014_solar_zone1_weather_seed2_points.csv` | `791bd3c3292f5b60615f7c04444a91e5aa5ed14731f956e68873425cb7739ff4` |
+| gefcom2014_solar_zone1 | weather | 3 | 157 | 125 | 2.41 | `gefcom2014_solar_zone1_weather_seed3_points.csv` | `c92cd41d5b02a1bab30872fa75e217c97d3f91d41f425c21f9ab2c1f55ca6324` |
+| gefcom2014_solar_zone1 | weather | 4 | 157 | 104 | 1.96 | `gefcom2014_solar_zone1_weather_seed4_points.csv` | `97e5e2eae9c001a9cbe02d68cf9a75e7b45282bde3537af3116d016de9e6875c` |
+| gefcom2014_solar_zone2 | calendar | 0 | 157 | 180 | 3.79 | `gefcom2014_solar_zone2_calendar_seed0_points.csv` | `be9be5a4cb9a7c63ed969b2b5f0eb6df654b698c295d9532582e9096ca07e475` |
+| gefcom2014_solar_zone2 | calendar | 1 | 157 | 119 | 2.85 | `gefcom2014_solar_zone2_calendar_seed1_points.csv` | `f6e2756b9ed7fc8676ac39d4f0ed4af18a741c2fdd155a4cbf78ab96c2cd8624` |
+| gefcom2014_solar_zone2 | calendar | 2 | 157 | 124 | 2.55 | `gefcom2014_solar_zone2_calendar_seed2_points.csv` | `adb0aaf1de5e01d3403110fe3053adc37582a374a9cbbf8f04fa79b5d962fac8` |
+| gefcom2014_solar_zone2 | calendar | 3 | 157 | 110 | 1.95 | `gefcom2014_solar_zone2_calendar_seed3_points.csv` | `11ff845b064ebf9e88682417d760b0845a7105d37969b270ddd4f42ce2232704` |
+| gefcom2014_solar_zone2 | calendar | 4 | 157 | 89 | 1.84 | `gefcom2014_solar_zone2_calendar_seed4_points.csv` | `f0c3fc1569bd7841013d9f6526cceb2256efee87fc601d04130afc9336b81ccc` |
+| gefcom2014_solar_zone2 | weather | 0 | 157 | 115 | 2.38 | `gefcom2014_solar_zone2_weather_seed0_points.csv` | `0be27f926f2149af1859c185541a1fc935ba2f85d618ee4761ecec1461066e5c` |
+| gefcom2014_solar_zone2 | weather | 1 | 157 | 104 | 2.32 | `gefcom2014_solar_zone2_weather_seed1_points.csv` | `392ff3ebfbaa723ee43a3bc12db53a95fc345ac554e1a8f37c4413272bcd33fc` |
+| gefcom2014_solar_zone2 | weather | 2 | 157 | 104 | 2.19 | `gefcom2014_solar_zone2_weather_seed2_points.csv` | `1b0a8486da8824b289048c2c86f6462632b54ce0d24ef1940086fd09a1bb695f` |
+| gefcom2014_solar_zone2 | weather | 3 | 157 | 107 | 2.55 | `gefcom2014_solar_zone2_weather_seed3_points.csv` | `268e6b8dcf25c0783eb1a1aba572dcc56d44979235d2e793c6d833fba562d893` |
+| gefcom2014_solar_zone2 | weather | 4 | 157 | 111 | 2.6 | `gefcom2014_solar_zone2_weather_seed4_points.csv` | `e11ca5159538bfd509f694020628e11e7b957a1adb33efedb29b4d79288e1a02` |
+| gefcom2014_solar_zone3 | calendar | 0 | 157 | 96 | 1.99 | `gefcom2014_solar_zone3_calendar_seed0_points.csv` | `d8d97d9db6b65f16c1ae83006ccb91a0dbe1e3d06ea5d16a6bb00baa635c160e` |
+| gefcom2014_solar_zone3 | calendar | 1 | 157 | 87 | 1.96 | `gefcom2014_solar_zone3_calendar_seed1_points.csv` | `ee1ddc5c08afde1c9ea3fd120310788ba45d71978f5ce75a859d75aa887365cb` |
+| gefcom2014_solar_zone3 | calendar | 2 | 157 | 87 | 2.04 | `gefcom2014_solar_zone3_calendar_seed2_points.csv` | `b4a4e55c36f36dae4bb978a7f4080f47103649fb1d612db1f3ffb3871453e31a` |
+| gefcom2014_solar_zone3 | calendar | 3 | 157 | 97 | 2.26 | `gefcom2014_solar_zone3_calendar_seed3_points.csv` | `0a6ca644bc5d9b79db2c8d2ce3c4ae160e5bb672b50666a7083ac1967c5810cb` |
+| gefcom2014_solar_zone3 | calendar | 4 | 157 | 106 | 2.56 | `gefcom2014_solar_zone3_calendar_seed4_points.csv` | `7335a68935913528fffd8cb6043e63636c9b592d04644c4cc85c65cf6fed9c1e` |
+| gefcom2014_solar_zone3 | weather | 0 | 157 | 102 | 2.62 | `gefcom2014_solar_zone3_weather_seed0_points.csv` | `fed1df71fb044fc7825a73445fc380a36c32d933c5b5ff4685660627ddb809cb` |
+| gefcom2014_solar_zone3 | weather | 1 | 157 | 112 | 2.31 | `gefcom2014_solar_zone3_weather_seed1_points.csv` | `9bba2c675946634fc7646aace6544e36496d7d4010f0a8b67b86a515458d03dc` |
+| gefcom2014_solar_zone3 | weather | 2 | 157 | 115 | 3.34 | `gefcom2014_solar_zone3_weather_seed2_points.csv` | `b49685c4db697277d0b36dbf9aade0e3d8cc2b1468c2a6f573aea6c46beb4f52` |
+| gefcom2014_solar_zone3 | weather | 3 | 157 | 104 | 2.28 | `gefcom2014_solar_zone3_weather_seed3_points.csv` | `2fc5f66776df37d270a48a7cd21089d6943c08f54106f433fbebe367ae4733aa` |
+| gefcom2014_solar_zone3 | weather | 4 | 157 | 106 | 2.4 | `gefcom2014_solar_zone3_weather_seed4_points.csv` | `d88114ae9e47f258cc042d35e5d14f99d0bf5453e798a1c19774bd4ecd459c8c` |
+| gefcom2014_wind_zone1 | calendar | 0 | 52 | 111 | 2.15 | `gefcom2014_wind_zone1_calendar_seed0_points.csv` | `0f3259d516492ef935ba47f7ca41f156076aabd6f383fc245d8f18858bd197c4` |
+| gefcom2014_wind_zone1 | calendar | 1 | 52 | 153 | 2.41 | `gefcom2014_wind_zone1_calendar_seed1_points.csv` | `711da4c1bf38fee1c96047d7c2806a7a9c0a7d4a2783d7319f5737bd6a859c23` |
+| gefcom2014_wind_zone1 | calendar | 2 | 52 | 87 | 1.91 | `gefcom2014_wind_zone1_calendar_seed2_points.csv` | `95b941d165a6fbef72ecc6abab325f5ada6ede0109509e6a0314c4f6ac56f710` |
+| gefcom2014_wind_zone1 | calendar | 3 | 52 | 120 | 2.32 | `gefcom2014_wind_zone1_calendar_seed3_points.csv` | `40b9c8ded8e57c92de0983990982ce818ef9ed2ccccb330da1ff7ea0885e5e9c` |
+| gefcom2014_wind_zone1 | calendar | 4 | 52 | 99 | 1.94 | `gefcom2014_wind_zone1_calendar_seed4_points.csv` | `6756c33eefdf3d9f5bb06e26f964cfa2eee8f3adde32861759d0ec9ca229f4e2` |
+| gefcom2014_wind_zone1 | weather | 0 | 52 | 98 | 2.14 | `gefcom2014_wind_zone1_weather_seed0_points.csv` | `903729445e10e0ef89cfb099e5a9ab4312ff5c500234223ad94a9e9fee1aa5b9` |
+| gefcom2014_wind_zone1 | weather | 1 | 52 | 101 | 2.72 | `gefcom2014_wind_zone1_weather_seed1_points.csv` | `9c0c910c9cb7fa8773ed630339317577c7eab00a84b2744d4f4bdd2c39d83c79` |
+| gefcom2014_wind_zone1 | weather | 2 | 52 | 94 | 1.97 | `gefcom2014_wind_zone1_weather_seed2_points.csv` | `ca07569e9c9a22d7f08cd494dd9fdb5d4abe87a7ad5da700b7e4b7db3059c843` |
+| gefcom2014_wind_zone1 | weather | 3 | 52 | 89 | 2.36 | `gefcom2014_wind_zone1_weather_seed3_points.csv` | `ee74995c42b12c9997f65b555655d053f07a7e3148b8e865287b452120f37edf` |
+| gefcom2014_wind_zone1 | weather | 4 | 52 | 88 | 1.85 | `gefcom2014_wind_zone1_weather_seed4_points.csv` | `1c05f4bfceab7a9ebdf73d9347318a76cf38c3c648e3299f851572f5a1d89fe8` |
+| gefcom2014_wind_zone10 | calendar | 0 | 138 | 96 | 2.05 | `gefcom2014_wind_zone10_calendar_seed0_points.csv` | `934c287c3a842a4b916e5248ec0baac97a0398e31c8b91b36a01a220878da61b` |
+| gefcom2014_wind_zone10 | calendar | 1 | 138 | 143 | 2.39 | `gefcom2014_wind_zone10_calendar_seed1_points.csv` | `f5cd4ec4931a3825d8f29a73371cb867349d83b0a6cc22f7d67f42f4c233aecb` |
+| gefcom2014_wind_zone10 | calendar | 2 | 138 | 105 | 2.05 | `gefcom2014_wind_zone10_calendar_seed2_points.csv` | `17f700c3078146562ba611c816ce3cc4eeb909095d206a87bc0d33f191d3b40d` |
+| gefcom2014_wind_zone10 | calendar | 3 | 138 | 151 | 2.76 | `gefcom2014_wind_zone10_calendar_seed3_points.csv` | `55dcb533de2b875297489155c0f346e0e222240db6405b5cadac1721aba90271` |
+| gefcom2014_wind_zone10 | calendar | 4 | 138 | 105 | 2.04 | `gefcom2014_wind_zone10_calendar_seed4_points.csv` | `0a19919b7f00aa08948db0fab18ed5b91305f97ba873b52c0eb3dd6beab6a66a` |
+| gefcom2014_wind_zone10 | weather | 0 | 138 | 109 | 2.03 | `gefcom2014_wind_zone10_weather_seed0_points.csv` | `660e70007abbb7d9e9e80a471232a6e7ecb5d2b6761bf1f37c4e39e7db471a51` |
+| gefcom2014_wind_zone10 | weather | 1 | 138 | 112 | 2.73 | `gefcom2014_wind_zone10_weather_seed1_points.csv` | `1a76571eb547a38e40901f70c95b5f4635a568ab3ebe37c15b25ab0c67a26550` |
+| gefcom2014_wind_zone10 | weather | 2 | 138 | 94 | 1.99 | `gefcom2014_wind_zone10_weather_seed2_points.csv` | `afafa4458036cf43604158797e30673feb1f2d6b32aecc9c0bcd2017e9e381fe` |
+| gefcom2014_wind_zone10 | weather | 3 | 138 | 112 | 2.08 | `gefcom2014_wind_zone10_weather_seed3_points.csv` | `6ff3b59b55e4fb8c8fd4a11c6a28e83e53146e5ea57ee71ebd4d4bf8de0f0a6c` |
+| gefcom2014_wind_zone10 | weather | 4 | 138 | 115 | 2.22 | `gefcom2014_wind_zone10_weather_seed4_points.csv` | `857f2b239420063eb37b04a79f2a690a76bec4d30e555bb9da472d8357e25c5f` |
+| gefcom2014_wind_zone2 | calendar | 0 | 86 | 141 | 2.05 | `gefcom2014_wind_zone2_calendar_seed0_points.csv` | `e49592f11c28c0edb35dea6da4b1598fb1cc2746d075da479e5d04ebd50f2fbc` |
+| gefcom2014_wind_zone2 | calendar | 1 | 86 | 103 | 1.93 | `gefcom2014_wind_zone2_calendar_seed1_points.csv` | `828d7eb5088984b63a552447c03d4b8f96fdd8f7e3b773958f5a08ac970218e3` |
+| gefcom2014_wind_zone2 | calendar | 2 | 86 | 123 | 2.0 | `gefcom2014_wind_zone2_calendar_seed2_points.csv` | `9261cf5f620d69d79187287f50e196fabc308feaf0f22060ff20c34799d69d94` |
+| gefcom2014_wind_zone2 | calendar | 3 | 86 | 102 | 1.83 | `gefcom2014_wind_zone2_calendar_seed3_points.csv` | `42cd5cc354a3957894e068001e51762c2f04fd5943848b0d75215b1575d668db` |
+| gefcom2014_wind_zone2 | calendar | 4 | 86 | 139 | 2.22 | `gefcom2014_wind_zone2_calendar_seed4_points.csv` | `bd63bcf92dde28a378bafebb8bb7e5cc6408228d7f313a0a64f80fb567a0cba8` |
+| gefcom2014_wind_zone2 | weather | 0 | 86 | 115 | 1.96 | `gefcom2014_wind_zone2_weather_seed0_points.csv` | `df03ee7c6a2227376c57b935a3ec0cb2fafdc624e6f003d96db53cd7626f8666` |
+| gefcom2014_wind_zone2 | weather | 1 | 86 | 107 | 1.91 | `gefcom2014_wind_zone2_weather_seed1_points.csv` | `a29b88e751486e29b6ffffd165ff6b2439b55164358e468aa13b8f99cf55ed6c` |
+| gefcom2014_wind_zone2 | weather | 2 | 86 | 115 | 2.12 | `gefcom2014_wind_zone2_weather_seed2_points.csv` | `5d45950647b07ffab38da1535660e00b2b1f1886952d34aa6c0ecc2c1548c783` |
+| gefcom2014_wind_zone2 | weather | 3 | 86 | 111 | 2.18 | `gefcom2014_wind_zone2_weather_seed3_points.csv` | `d52c36c68cb6466e7a16e98e7dff4667584a56c8adca6368b8a7fb725618e210` |
+| gefcom2014_wind_zone2 | weather | 4 | 86 | 100 | 2.02 | `gefcom2014_wind_zone2_weather_seed4_points.csv` | `dd55d2f68de88b1a0f7a4420b77d694206384bed04701790199e7bfa107eea1a` |
+| gefcom2014_wind_zone3 | calendar | 0 | 60 | 103 | 1.92 | `gefcom2014_wind_zone3_calendar_seed0_points.csv` | `14d41e19af7e5a122922ee9926df3a00611da9731a0f836fbace50ac09e6fa52` |
+| gefcom2014_wind_zone3 | calendar | 1 | 60 | 99 | 1.84 | `gefcom2014_wind_zone3_calendar_seed1_points.csv` | `5f5dad6f82854e571ab58f51058d15542e6da4f3aa228a0d17184728f1678e8e` |
+| gefcom2014_wind_zone3 | calendar | 2 | 60 | 122 | 2.02 | `gefcom2014_wind_zone3_calendar_seed2_points.csv` | `e7a8e3369d0870972c8e1ccfb53ff59cda78b880c8a1f8cfe7ab0f935a9207b2` |
+| gefcom2014_wind_zone3 | calendar | 3 | 60 | 116 | 2.2 | `gefcom2014_wind_zone3_calendar_seed3_points.csv` | `fc9c3a8aad321cbcc7556d0439763d5c1c1b29eec93a56a676d3066af7582051` |
+| gefcom2014_wind_zone3 | calendar | 4 | 60 | 101 | 1.93 | `gefcom2014_wind_zone3_calendar_seed4_points.csv` | `30b4e2c7aadc06344c76cbce60b336ee977ff92cdb9f1c6d8b72aeeeba7534d1` |
+| gefcom2014_wind_zone3 | weather | 0 | 60 | 108 | 1.94 | `gefcom2014_wind_zone3_weather_seed0_points.csv` | `4dc32bd211a891a6be170ebe79325fbfda7bc638a52dc9ae7025d1e057d2f938` |
+| gefcom2014_wind_zone3 | weather | 1 | 60 | 102 | 1.91 | `gefcom2014_wind_zone3_weather_seed1_points.csv` | `55f2e08745bec3edf3586e3a38f65c9e8692f6f14ae73fcc97be65b865aaedf5` |
+| gefcom2014_wind_zone3 | weather | 2 | 60 | 107 | 2.08 | `gefcom2014_wind_zone3_weather_seed2_points.csv` | `47283cb9fb7c86dcf45a5066dcf0bbabe737a0f8b0e4cfd0b7c312f6aa06d8c0` |
+| gefcom2014_wind_zone3 | weather | 3 | 60 | 105 | 2.03 | `gefcom2014_wind_zone3_weather_seed3_points.csv` | `b7efea60cf2d7583bc77a058dffb39ffffbc42d9ce6081f817ec4b8ce8688916` |
+| gefcom2014_wind_zone3 | weather | 4 | 60 | 137 | 2.48 | `gefcom2014_wind_zone3_weather_seed4_points.csv` | `83fb107f65b69b990933e51ff4d02e2804a3f40967a080501b36afc7f143c038` |
+| gefcom2014_wind_zone4 | calendar | 0 | 138 | 119 | 3.09 | `gefcom2014_wind_zone4_calendar_seed0_points.csv` | `acc5161ef310121cb838ba765cbcdc676abdf554b96ae0809be08ce147105763` |
+| gefcom2014_wind_zone4 | calendar | 1 | 138 | 85 | 2.52 | `gefcom2014_wind_zone4_calendar_seed1_points.csv` | `4f030e48c49266e4d4ae5c5a46845608980b9a0b45103adc064ad841fecf691a` |
+| gefcom2014_wind_zone4 | calendar | 2 | 138 | 110 | 2.1 | `gefcom2014_wind_zone4_calendar_seed2_points.csv` | `b81bba76fa8fc5b64aef86282d062bd2a306e360dd66d914cf3089494a7e346f` |
+| gefcom2014_wind_zone4 | calendar | 3 | 138 | 89 | 1.87 | `gefcom2014_wind_zone4_calendar_seed3_points.csv` | `33dab4f5238ddfbd9f018acf8c8a5831356ec71e8344566db9f21f148838367a` |
+| gefcom2014_wind_zone4 | calendar | 4 | 138 | 116 | 2.64 | `gefcom2014_wind_zone4_calendar_seed4_points.csv` | `555cbd5da2f045d6400b6a80f94bde42c390ae7f2cf458f916f2cbec21706a6b` |
+| gefcom2014_wind_zone4 | weather | 0 | 138 | 91 | 2.11 | `gefcom2014_wind_zone4_weather_seed0_points.csv` | `0911c67501e69fbba45fc5b1274477d878d402a969593ac9ba0d925e0a9d42f4` |
+| gefcom2014_wind_zone4 | weather | 1 | 138 | 100 | 2.11 | `gefcom2014_wind_zone4_weather_seed1_points.csv` | `07ba2c24bc6699e680af5600f692faa8ceda8a8ad70e4a3199fe7cc806591658` |
+| gefcom2014_wind_zone4 | weather | 2 | 138 | 157 | 2.48 | `gefcom2014_wind_zone4_weather_seed2_points.csv` | `3d8019cd5e0c3d4f76dfca0e942b81aa7335a4110c7e9d8f3081608d107f96cb` |
+| gefcom2014_wind_zone4 | weather | 3 | 138 | 148 | 2.44 | `gefcom2014_wind_zone4_weather_seed3_points.csv` | `07d0336c9878680bb3bfb93af69c4f1578a766a1ef8fe4dfe5d8d43938731def` |
+| gefcom2014_wind_zone4 | weather | 4 | 138 | 104 | 2.04 | `gefcom2014_wind_zone4_weather_seed4_points.csv` | `507eaa074c064f6f7745bc19239e11d90dc9998531bfa5956e7602e83a029bfd` |
+| gefcom2014_wind_zone5 | calendar | 0 | 138 | 96 | 1.99 | `gefcom2014_wind_zone5_calendar_seed0_points.csv` | `69c67812229d247f020ef3598341b7818354b035d680c0517b5c50440b73929f` |
+| gefcom2014_wind_zone5 | calendar | 1 | 138 | 117 | 2.08 | `gefcom2014_wind_zone5_calendar_seed1_points.csv` | `7a99793fecad2668e2e13e2b85dee552df2ee9d4390ce30d6dc73007466b55b9` |
+| gefcom2014_wind_zone5 | calendar | 2 | 138 | 109 | 2.25 | `gefcom2014_wind_zone5_calendar_seed2_points.csv` | `b70484c17a460b63c546f5501b2345ebfe6d207e2f71a590e2b87fa744b25782` |
+| gefcom2014_wind_zone5 | calendar | 3 | 138 | 100 | 1.99 | `gefcom2014_wind_zone5_calendar_seed3_points.csv` | `c5b11307cacc1c03d6d7499090ded6cc73dfbcaf5222b3888e26ee901094a977` |
+| gefcom2014_wind_zone5 | calendar | 4 | 138 | 106 | 2.0 | `gefcom2014_wind_zone5_calendar_seed4_points.csv` | `d0789849b73fd30693e99b4b573a4b8988981dc23aa91672c77b9e900b6af6cc` |
+| gefcom2014_wind_zone5 | weather | 0 | 138 | 187 | 3.22 | `gefcom2014_wind_zone5_weather_seed0_points.csv` | `5f5b450ea550ecc594e676f4a235cd42c855baf024c430ca3891b634c0dc1fa6` |
+| gefcom2014_wind_zone5 | weather | 1 | 138 | 154 | 2.96 | `gefcom2014_wind_zone5_weather_seed1_points.csv` | `2762ff129d5aed8857b95b9df3467eae7b70e7070c3741042f2c768a7338acab` |
+| gefcom2014_wind_zone5 | weather | 2 | 138 | 204 | 3.34 | `gefcom2014_wind_zone5_weather_seed2_points.csv` | `18da6ea1786ba6b7f78345fe58f4a1f478da70bfee2729d150b13f3118e99743` |
+| gefcom2014_wind_zone5 | weather | 3 | 138 | 276 | 3.89 | `gefcom2014_wind_zone5_weather_seed3_points.csv` | `6e553b45125bd277417434d66a822a055e49ee04ce266f315fb2d96aca1c1f55` |
+| gefcom2014_wind_zone5 | weather | 4 | 138 | 140 | 3.08 | `gefcom2014_wind_zone5_weather_seed4_points.csv` | `3dc9aaf09e6ea2e82eb042153c4d9ba7400298a9568ca4a5ea2b12445a5a6261` |
+| gefcom2014_wind_zone6 | calendar | 0 | 138 | 104 | 3.55 | `gefcom2014_wind_zone6_calendar_seed0_points.csv` | `68077dc5c265d214d9e0c348ab75c644fe2db7795a08d710c5d76ec00812a4c8` |
+| gefcom2014_wind_zone6 | calendar | 1 | 138 | 104 | 3.2 | `gefcom2014_wind_zone6_calendar_seed1_points.csv` | `3677162005529a183ffb21c8a147351395a1416fffe86e76f591eb0893e9e887` |
+| gefcom2014_wind_zone6 | calendar | 2 | 138 | 109 | 3.44 | `gefcom2014_wind_zone6_calendar_seed2_points.csv` | `b89d066e967e5e570eb9f1b5b805ddeca396ac9a36027f2c4225460118f87eba` |
+| gefcom2014_wind_zone6 | calendar | 3 | 138 | 111 | 3.2 | `gefcom2014_wind_zone6_calendar_seed3_points.csv` | `a71126415682a18c8dc4407de25c3a99d48fc236429f576d3ac90bf1a7eb4818` |
+| gefcom2014_wind_zone6 | calendar | 4 | 138 | 119 | 3.41 | `gefcom2014_wind_zone6_calendar_seed4_points.csv` | `09bb69fbf929f058c44ac30c3dbb967b02f393f5b35d630b88e46456779e52c5` |
+| gefcom2014_wind_zone6 | weather | 0 | 138 | 131 | 3.27 | `gefcom2014_wind_zone6_weather_seed0_points.csv` | `a4ccd7f84cd19f0f762cb4f3de06fdadf8337106ccd81dd8a9126286bce90101` |
+| gefcom2014_wind_zone6 | weather | 1 | 138 | 145 | 3.49 | `gefcom2014_wind_zone6_weather_seed1_points.csv` | `ef4eaa89ce9ef44464c8fa2fd36e981f83e766af3e40ce73c0fc5d8f97720420` |
+| gefcom2014_wind_zone6 | weather | 2 | 138 | 147 | 3.9 | `gefcom2014_wind_zone6_weather_seed2_points.csv` | `8d0d2adaf64329ea3a53e9165516a3514c937cc54e581f5f7435c60a8bd7e56c` |
+| gefcom2014_wind_zone6 | weather | 3 | 138 | 125 | 4.07 | `gefcom2014_wind_zone6_weather_seed3_points.csv` | `cc9742367f77ad63555625dfd2b5d2cb24a45cdfd0ff963ccc72b8144498da28` |
+| gefcom2014_wind_zone6 | weather | 4 | 138 | 122 | 3.27 | `gefcom2014_wind_zone6_weather_seed4_points.csv` | `0fc9ea4c51c6d390c5b65b3234a2e011f03016ad9fb3066caab497ac6c8222ac` |
+| gefcom2014_wind_zone7 | calendar | 0 | 138 | 89 | 2.86 | `gefcom2014_wind_zone7_calendar_seed0_points.csv` | `db58171268ba3ab828a9f5ca0c44e83ef48cab968baa617ae202ae47e5be4e13` |
+| gefcom2014_wind_zone7 | calendar | 1 | 138 | 101 | 3.1 | `gefcom2014_wind_zone7_calendar_seed1_points.csv` | `5d21be9dfcd6c578a6af4fd1945ac2df1a9d7e41a13454c7eafd685a90966e0c` |
+| gefcom2014_wind_zone7 | calendar | 2 | 138 | 104 | 2.91 | `gefcom2014_wind_zone7_calendar_seed2_points.csv` | `846925125d1514634cb187a87d733e85a7c01880e1144c0a0a8494b717d181ee` |
+| gefcom2014_wind_zone7 | calendar | 3 | 138 | 87 | 2.75 | `gefcom2014_wind_zone7_calendar_seed3_points.csv` | `f978b4b0f4e53dabdd00634a268f077848228e40218a5a9bbcb2e39613cf9473` |
+| gefcom2014_wind_zone7 | calendar | 4 | 138 | 78 | 2.79 | `gefcom2014_wind_zone7_calendar_seed4_points.csv` | `68570301e4b3ec64b9bf8206946c69b8fbd8632d89887c2dc14cbdfe7b3337a7` |
+| gefcom2014_wind_zone7 | weather | 0 | 138 | 127 | 3.57 | `gefcom2014_wind_zone7_weather_seed0_points.csv` | `ddbe24b9e379f9e8762b53793716ed3457b2079061d58b7ad7b178c6c91fc3ba` |
+| gefcom2014_wind_zone7 | weather | 1 | 138 | 105 | 3.02 | `gefcom2014_wind_zone7_weather_seed1_points.csv` | `be6e7dbeb66e19043df86734a6df664f007e280e7a81e0dfc917d71272931cc4` |
+| gefcom2014_wind_zone7 | weather | 2 | 138 | 121 | 3.32 | `gefcom2014_wind_zone7_weather_seed2_points.csv` | `c43b6c40bc6eaa02f8bc8e4990e32e21f1505d363c73ee1650ead590a120d30d` |
+| gefcom2014_wind_zone7 | weather | 3 | 138 | 114 | 3.29 | `gefcom2014_wind_zone7_weather_seed3_points.csv` | `55d9573d3652d9dca3cb1009c7e0c385469379547934fa7bb6c660c1455434ca` |
+| gefcom2014_wind_zone7 | weather | 4 | 138 | 102 | 2.88 | `gefcom2014_wind_zone7_weather_seed4_points.csv` | `eadf70d155e3e022af57aa8086262834e656de8776beafe99586b67566155091` |
+| gefcom2014_wind_zone8 | calendar | 0 | 138 | 87 | 1.95 | `gefcom2014_wind_zone8_calendar_seed0_points.csv` | `b29e31c52ecbcb4f212a4b31bf17646d8ceb8d19f71cd3e2b9e361720c0ee306` |
+| gefcom2014_wind_zone8 | calendar | 1 | 138 | 93 | 1.86 | `gefcom2014_wind_zone8_calendar_seed1_points.csv` | `295f3516f01b8c7f142b578b24c24a2bb76ad183c6b71ed256b3a877626f44f1` |
+| gefcom2014_wind_zone8 | calendar | 2 | 138 | 97 | 2.16 | `gefcom2014_wind_zone8_calendar_seed2_points.csv` | `e7176954a26ffacf5399040276d3b05c15165a68d56c4f02f7de8c4bac7ab5d8` |
+| gefcom2014_wind_zone8 | calendar | 3 | 138 | 89 | 2.03 | `gefcom2014_wind_zone8_calendar_seed3_points.csv` | `9d6fa334b6648988f610e5388d182a30c6b2e7912ad38fa98f9afaf1ed8a97e8` |
+| gefcom2014_wind_zone8 | calendar | 4 | 138 | 88 | 1.96 | `gefcom2014_wind_zone8_calendar_seed4_points.csv` | `1455ace5409d2d2c13714c9250dfbf348856a54aa56d570b374fd565967584de` |
+| gefcom2014_wind_zone8 | weather | 0 | 138 | 93 | 2.47 | `gefcom2014_wind_zone8_weather_seed0_points.csv` | `8a83cc85a52734dfd046682e2b7d9be4d2da6f3f715028f599a2cec5d44dfddc` |
+| gefcom2014_wind_zone8 | weather | 1 | 138 | 100 | 2.16 | `gefcom2014_wind_zone8_weather_seed1_points.csv` | `0090c638c74c593e510fcd8d1b308803e8d91dbd08acbe50246b2c0760d939aa` |
+| gefcom2014_wind_zone8 | weather | 2 | 138 | 100 | 2.47 | `gefcom2014_wind_zone8_weather_seed2_points.csv` | `5f782cfab78ae1e585edc89b720a3ac21a1d38d5eeea860cdb97215bcb3e74eb` |
+| gefcom2014_wind_zone8 | weather | 3 | 138 | 108 | 3.17 | `gefcom2014_wind_zone8_weather_seed3_points.csv` | `58275b7d98711fd2d67fafa9be312c8a94433962489cf647eadc44084f2a5514` |
+| gefcom2014_wind_zone8 | weather | 4 | 138 | 100 | 2.41 | `gefcom2014_wind_zone8_weather_seed4_points.csv` | `aa9f49b108ddf631bae2f86abf340913bf1bf4f03a08c306964e9e455525e147` |
+| gefcom2014_wind_zone9 | calendar | 0 | 138 | 102 | 2.07 | `gefcom2014_wind_zone9_calendar_seed0_points.csv` | `5c02e872cc745d1893f2b44977561aa7923e10ac53d92915cc779f2a1b66e8fe` |
+| gefcom2014_wind_zone9 | calendar | 1 | 138 | 115 | 2.14 | `gefcom2014_wind_zone9_calendar_seed1_points.csv` | `1c33588365d1aff41b5fe98a8eaecf6d0e6a83f6c263ea5ac62b15c0251602ad` |
+| gefcom2014_wind_zone9 | calendar | 2 | 138 | 154 | 2.57 | `gefcom2014_wind_zone9_calendar_seed2_points.csv` | `677dfde6af50e5bc229a874d067ffbbc9c5529bbc745d575e565fa6b5cec7bda` |
+| gefcom2014_wind_zone9 | calendar | 3 | 138 | 113 | 2.39 | `gefcom2014_wind_zone9_calendar_seed3_points.csv` | `1db4ab53a8983d61efd379a5a362c73dd896560b736eea9d0674ad72fbcc6e1d` |
+| gefcom2014_wind_zone9 | calendar | 4 | 138 | 119 | 2.39 | `gefcom2014_wind_zone9_calendar_seed4_points.csv` | `621d27712145c255ee225cf82689d9e32c41d45a582051a733bdab4d49b97136` |
+| gefcom2014_wind_zone9 | weather | 0 | 138 | 235 | 3.48 | `gefcom2014_wind_zone9_weather_seed0_points.csv` | `08618cdd39a8293de7df3e4ef2fa43909f2d8355eb07a3fbb6208c4aa0af4a00` |
+| gefcom2014_wind_zone9 | weather | 1 | 138 | 176 | 3.13 | `gefcom2014_wind_zone9_weather_seed1_points.csv` | `dd991b26e75aa6e17381bd0e299357579bcab45e6bbf7f1f4c2ada6228961db9` |
+| gefcom2014_wind_zone9 | weather | 2 | 138 | 193 | 2.88 | `gefcom2014_wind_zone9_weather_seed2_points.csv` | `142ea8ef296bc394603214bdcea8ab6094c801b0c49d30a33b3daa085fc8fcbb` |
+| gefcom2014_wind_zone9 | weather | 3 | 138 | 225 | 3.29 | `gefcom2014_wind_zone9_weather_seed3_points.csv` | `b98316a6c3830d2a3e00ffd953c087848e15682cc066362e2e0b7cba90bf70f4` |
+| gefcom2014_wind_zone9 | weather | 4 | 138 | 157 | 2.51 | `gefcom2014_wind_zone9_weather_seed4_points.csv` | `a22a710334d6c6a2b4d3d0d0aaaad7f8fb6d45857b79fb34db520be10e590d46` |
