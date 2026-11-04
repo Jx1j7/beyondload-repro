@@ -7,7 +7,9 @@ This repository preserves the code and numerical artifacts for a **post-hoc, com
 - `code/experiments/`: experiment and audit source, including the four-arm daily comparison.
 - `experiments/competition_aligned_cpu/`: eligible daily origins, 156 point-forecast CSVs, site/origin scores, and SHA-256 run manifests.
 - `experiments/results.csv` and `experiments/metric_audit/`: original aggregate archive and the separately corrected metric audit. The archived file is unchanged (SHA-256 `de787fa9079cab02598904398344166142d832ac734ec918e0435999c275dea8`).
-- `paper/`: per-site appendices and figures generated from the result files.
+- `paper/appendix-*.md`: per-site appendices from the archived analyses.
+- `paper/submission/`: the current supplementary analyses and Figure 1 / Figures S1–S2 in PNG, PDF, EPS, and SVG. The submitted manuscript itself is not included.
+- `code/experiments/make_submission_figures_cpu.py`: regenerates the current figures from the archived CSVs without model inference.
 - `docs/05-RQ与实验协议.md`: original protocol plus explicitly dated post-hoc amendment log. Its instructions are historical research records, not repository commands.
 
 The original public competition data, processed data, model checkpoints, virtual environment, execution logs, and the unpublished manuscript are **not** redistributed. The local Hugging Face cache path in the Chronos-2 manifest is redacted for release; the model revision and all prediction-file hashes are preserved.
@@ -21,6 +23,14 @@ python scripts/verify_release.py
 ```
 
 The expected result is 13 sites, 1,635 shared daily forecast origins, 156 prediction files, and 39,240 shared observed target values. `experiments/competition_aligned_cpu/comparison_report.md` summarizes the corrected MASE results; `paper/appendix-B-competition-aligned.md` gives per-site scores.
+
+The current Figure 1 and supplementary Figures S1–S2 can be regenerated after installing `requirements-core.txt` with:
+
+```bash
+.venv/bin/python code/experiments/make_submission_figures_cpu.py
+```
+
+The three figures read `paired_per_site.csv`, `corrected_per_site.csv`, and `per_site_comparison.csv`, respectively. Figure S1 is descriptive; no significance bar is plotted. Figure S2 shows unconnected points because its two arms need not have identical eligible origins. Earlier figure-generating scripts remain as historical research code, but their superseded outputs are omitted from this release.
 
 ## Reproduce the CPU comparison from source data
 
@@ -66,4 +76,4 @@ The old `chronos2+cov;step=24` rows in `experiments/results.csv` are **not** fut
 
 The earlier neural-model runners depend on [Time-Series-Library](https://github.com/thuml/Time-Series-Library) at commit `4e938a1767106324dd753b2a44832bf870a0252e`. Its code is not vendored here; install it separately under `code/tslib` to execute those historical runners. Chronos-2 weights are downloaded separately from the model publisher. Original GEFCom data should be obtained from its publisher. This repository does not grant a license to third-party data or model weights.
 
-No project-wide code license has been selected yet. Contact the repository owner before reusing project-specific code beyond ordinary inspection and reproducibility review.
+The original code and documentation in this repository are released under the [MIT License](LICENSE). This license does not apply to the original GEFCom2014 data, pretrained model weights, or third-party software, which retain their own terms. Archived prediction files and derived numerical outputs are supplied for verification; users should cite the paper and original data source when reusing them.
