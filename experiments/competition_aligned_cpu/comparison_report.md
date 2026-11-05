@@ -9,7 +9,7 @@ Scores use the same training-period 24-hour seasonal-naive denominator as the me
 - Paired eligible origins: 1635 across 13 renewable sites.
 - Weather-arm site wins: {'LightGBM': 13}.
 - Sensitivity excluding sparse-context wind zones 1–3: on wind zones 4–10, LightGBM + NWP mean 0.458 versus Chronos-2 + NWP 0.647; LightGBM lower at all seven sites.
-- Origin-loss CSV SHA-256: `7b3f0f34278512c343df2fb8125d98273ef98b70574ee4ca8d8b4e4fa7240f45`.
+- Origin-loss CSV SHA-256: `1694ff3474d7eca94c8d81d37eaaa1c649c2cf919caf03e41b7887bbdc9272d6`.
 
 | Track | Model | Calendar only | Calendar + NWP | Sites |
 |---|---|---:|---:|---:|

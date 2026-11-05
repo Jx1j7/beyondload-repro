@@ -45,7 +45,7 @@ In the solar zone-1 pilot, TTM's full fine-tuning and LoRA scores were 0.965 and
 
 ## S2. Probabilistic calibration: mixed outcomes in zone-1 pilots
 
-Table S3 reports zone-1 interval pilots. On wind, CQR increased empirical coverage from 0.738 to 1.000 but widened the interval to 0.952 on the [0, 1] power scale; this is a poor coverage–width trade-off in that pilot. On solar, CQR over-covered (0.987), whereas split conformal on LightGBM under-covered (0.793), so neither result supports a general claim of nominal solar calibration. The native Chronos row has nominal 80% coverage, whereas the conformal rows target 90%. The load width values are reported in MW and require a separate definition from normalized PINAW. These observations motivate, but do not validate, the protocol's volatility-tiered (Mondrian) conformal method and EnbPI [23] ablation. Full-site results and calibration-window diagnostics are needed before attributing the wind behavior to a particular exchangeability failure.
+Table S3 reports zone-1 interval pilots. On wind, CQR increased empirical coverage from 0.738 to 1.000 but widened the interval to 0.952 on the [0, 1] power scale; this is a poor coverage–width trade-off in that pilot. On solar, CQR over-covered (0.987), whereas split conformal on LightGBM under-covered (0.793), so neither result supports a general claim of nominal solar calibration. The native Chronos row has nominal 80% coverage, whereas the conformal rows target 90%. The load width values are reported in MW and require a separate definition from prediction interval normalized average width (PINAW). These observations motivate, but do not validate, the protocol's volatility-tiered (Mondrian) conformal method and ensemble batch prediction intervals (EnbPI) [23] ablation. Full-site results and calibration-window diagnostics are needed before attributing the wind behavior to a particular exchangeability failure.
 
 **Table S3.** Interval calibration pilots at zone 1 (PICP / mean interval width). Native Chronos intervals target 80% coverage; conformal rows target 90%. Load widths are in MW; wind and solar widths use the [0, 1] power scale.
 
@@ -70,3 +70,25 @@ In the solar ramp pilot, LightGBM+NWP attains F1 = 0.41 versus 0.19 for Chronos;
 ## S6. Model routing (exploratory): naive volatility routing fails
 
 In the zone-1 pilot using the original metric, a three-tier volatility router selecting among TSFMs and LightGBM per origin did not beat the best single model: without NWP it reaches 0.716 on the original scaled metric for wind against 0.694 for the best single model; with NWP access it degenerates to always selecting LightGBM. We report this as a bounded negative result—recent-volatility state is not a sufficient routing signal; ramp-activity and NWP-informed states remain open questions.
+
+## S7. Exploratory paired uncertainty for the daily comparison
+
+Table S4 gives within-site paired weather-arm gaps and 95% circular moving-block bootstrap intervals. A block contains seven consecutive eligible origins; there are 5,000 resamples with seed 20261106. Solar origins are weighted by scored daylight hours, and LightGBM losses are averaged over five seeds before resampling. The intervals condition on the selected origins and model runs, use no multiple-comparison adjustment, and do not estimate a population of independent sites. Gaps in eligible calendar dates make the seven-origin block an approximation rather than a verified seven-day dependence model. The exact CSV and method are in `experiments/competition_aligned_cpu/paired_site_intervals.csv` and `paired_site_intervals_method.md`.
+
+**Table S4.** LightGBM minus Chronos-2 corrected MASE in the future-NWP arm; negative favors LightGBM.
+
+| Site | Origin days | Gap | Exploratory 95% interval |
+|---|---:|---:|---:|
+| solar zone 1 | 157 | -0.108 | [-0.154, -0.062] |
+| solar zone 2 | 157 | -0.059 | [-0.109, -0.010] |
+| solar zone 3 | 157 | -0.061 | [-0.107, -0.019] |
+| wind zone 1 | 52 | -0.093 | [-0.173, -0.017] |
+| wind zone 10 | 138 | -0.208 | [-0.261, -0.157] |
+| wind zone 2 | 86 | -0.107 | [-0.220, +0.037] |
+| wind zone 3 | 60 | -0.182 | [-0.255, -0.112] |
+| wind zone 4 | 138 | -0.173 | [-0.228, -0.124] |
+| wind zone 5 | 138 | -0.229 | [-0.291, -0.166] |
+| wind zone 6 | 138 | -0.207 | [-0.266, -0.151] |
+| wind zone 7 | 138 | -0.192 | [-0.243, -0.143] |
+| wind zone 8 | 138 | -0.119 | [-0.192, -0.039] |
+| wind zone 9 | 138 | -0.191 | [-0.253, -0.133] |

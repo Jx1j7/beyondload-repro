@@ -65,7 +65,7 @@ def main() -> None:
                 site_rows.append(dict(dataset=dataset, track=track, model=model,
                                       arm=arm, origins=len(merged), mase=overall,
                                       seeds=len(seeds)))
-        combined = daily[("Chronos-2","calendar")][["origin_index"]].copy()
+        combined = daily[("Chronos-2","calendar")][["origin_index", "count"]].copy()
         for (model,arm), losses in daily.items():
             key = f"{model.lower().replace('-', '')}_{arm}_mase"
             combined[key] = losses.mase_origin.to_numpy()

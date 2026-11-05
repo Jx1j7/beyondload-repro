@@ -1,0 +1,5 @@
+# Exploratory within-site paired intervals
+
+Source: `paired_origin_losses.csv` (SHA-256 `1694ff3474d7eca94c8d81d37eaaa1c649c2cf919caf03e41b7887bbdc9272d6`). The `count` column is the number of scored target hours per origin; solar uses actual power > 0.01 and wind uses all 24 hours. All statistics are count-weighted means of corrected origin MASE. Each LightGBM origin loss is averaged over its five archived seeds before resampling.
+
+For each site, a circular moving-block bootstrap resamples 7 consecutive eligible origins at a time, 5,000 times, with NumPy seed 20261106. The 2.5th and 97.5th percentiles are reported. Weather gap is LightGBM minus Chronos-2 with NWP; calendar gap is the analogous calendar-only difference; gap change is weather gap minus calendar gap. Intervals condition on each site's selected origin sequence and the fixed models and seeds. Eligible dates can have gaps, so adjacent selected origins are not always adjacent calendar days. Block length is a sensitivity choice, not a verified dependence horizon. No multiple-testing adjustment or cross-site population inference is made.

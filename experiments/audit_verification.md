@@ -1,5 +1,7 @@
 # 本轮工件核验（2026-11-04）
 
+> 历史记录说明：下文前半部分核对的是 2026-11-04 的旧稿（23 条参考文献、旧版 30 格表 3），不能用作当前投稿稿的表 3 核验。当前四臂主比较的 13 站与 1,635 个起点见文末“每日共同窗口四臂对照的追加核验”；新增的逐起点有效小时数及探索性站内区间见 `competition_aligned_cpu/paired_site_intervals_method.md`。
+
 - 英文稿表 3 的 30 个模型×轨道单元逐项对照 `metric_audit/corrected_cross_site.csv`：25 个数字的三位小数一致，5 个缺测格与 CSV 的模型覆盖范围一致；五模型统计与 `metric_audit/report.md` 一致。
 - 新无 NWP LightGBM CSV 共 70 行，14 个站点数据集均有 5 个种子；加入真实 UTC 起止时间和逐行写入时间后重跑，70/70 MASE 数值完全相同（最大绝对差 0）。实际执行清单见 `information_match_cpu/run_manifest.md`，输入与输出 SHA-256 已登记。
 - 归档 `results.csv` 与只读 ZCode 原目录同名文件 SHA-256 均为 `de787fa9079cab02598904398344166142d832ac734ec918e0435999c275dea8`，确认本轮未覆盖原结果。

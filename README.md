@@ -5,7 +5,7 @@ This repository preserves the code and numerical artifacts for a **post-hoc, com
 ## What is included
 
 - `code/experiments/`: experiment and audit source, including the four-arm daily comparison.
-- `experiments/competition_aligned_cpu/`: eligible daily origins, 156 point-forecast CSVs, site/origin scores, and SHA-256 run manifests.
+- `experiments/competition_aligned_cpu/`: eligible daily origins, 156 point-forecast CSVs, site/origin scores, per-origin scored-hour counts, exploratory within-site paired intervals, and SHA-256 run manifests.
 - `experiments/results.csv` and `experiments/metric_audit/`: original aggregate archive and the separately corrected metric audit. The archived file is unchanged (SHA-256 `de787fa9079cab02598904398344166142d832ac734ec918e0435999c275dea8`).
 - `paper/appendix-*.md`: per-site appendices from the archived analyses.
 - `paper/submission/`: the current supplementary analyses and Figure 1 / Figures S1–S2 in PNG, PDF, EPS, and SVG. The submitted manuscript itself is not included.
@@ -22,7 +22,7 @@ Use Python 3.11 or newer:
 python scripts/verify_release.py
 ```
 
-The expected result is 13 sites, 1,635 shared daily forecast origins, 156 prediction files, and 39,240 shared observed target values. `experiments/competition_aligned_cpu/comparison_report.md` summarizes the corrected MASE results; `paper/appendix-B-competition-aligned.md` gives per-site scores.
+The expected result is 13 site-series, 1,635 shared daily forecast origins, 156 prediction files, and 39,240 shared observed target values. `experiments/competition_aligned_cpu/comparison_report.md` summarizes the corrected MASE results; `paper/appendix-B-competition-aligned.md` gives per-site scores. `paired_origin_losses.csv` includes `count`, the number of scored target hours per origin; weight solar origin MASE by this count to reconstruct site scores. `paired_site_intervals_method.md` records the exploratory block-bootstrap procedure and its limitations.
 
 The current Figure 1 and supplementary Figures S1–S2 can be regenerated after installing `requirements-core.txt` with:
 

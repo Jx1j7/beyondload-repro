@@ -1,5 +1,7 @@
 # Appendix B. Competition-schedule-aligned paired point accuracy
 
+The daily paired-loss source is `experiments/competition_aligned_cpu/paired_origin_losses.csv` (SHA-256 `1694ff3474d7eca94c8d81d37eaaa1c649c2cf919caf03e41b7887bbdc9272d6`). Its `count` column records scored target hours per origin, required to reconstruct solar site scores from the origin-level MASE values. Exploratory paired intervals and their limitations are documented in `paired_site_intervals_method.md` in the same directory.
+
 This post-hoc CPU analysis uses the same eligible daily 24-hour forecast windows for both models. Source weather records run from 01:00 to next-day 00:00; the midnight issue time is inferred from the GEFCom2014 publication and is not an explicit file field. A window is retained only when its preceding 512-hour raw target context, next 24 raw target hours, and weather fields are complete. The old hourly-origin scores in Appendix A are a different protocol.
 
 LightGBM is site-trained with five seeds; scores below average seed scores. Chronos-2 is zero-shot at pinned local revision `29ec3766d36d6f73f0696f85560a422f50e8498c`. Both models receive future-known calendar in both arms. The NWP arms both receive the next 24 hours' weather fields; Chronos-2 additionally sees their past trajectory through its native interface. Wind is scored over all hours, solar over observed power >1% hours; both use a training-period 24-hour seasonal-naive denominator.
