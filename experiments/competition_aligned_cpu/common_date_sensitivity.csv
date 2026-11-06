@@ -1,0 +1,5 @@
+model,arm,mean_mase,sites,min_origins,max_origins,first_day,last_day
+Chronos-2,calendar,0.744009657303417,10,38,72,2013-10-10,2013-12-20
+Chronos-2,weather,0.6429465409426467,10,38,72,2013-10-10,2013-12-20
+LightGBM,calendar,0.7395805923680554,10,38,72,2013-10-10,2013-12-20
+LightGBM,weather,0.4808500555866943,10,38,72,2013-10-10,2013-12-20

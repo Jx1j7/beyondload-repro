@@ -92,3 +92,14 @@ Table S4 gives within-site paired weather-arm gaps and 95% circular moving-block
 | wind zone 7 | 138 | -0.192 | [-0.243, -0.143] |
 | wind zone 8 | 138 | -0.119 | [-0.192, -0.039] |
 | wind zone 9 | 138 | -0.191 | [-0.253, -0.133] |
+
+## S8. Common-calendar-window sensitivity
+
+This descriptive restriction keeps already-eligible wind origins whose source-file dates fall between 10 October and 20 December 2013, the intersection of the ten zones’ eligible date ranges. Each zone contributes 38–72 origins. It does not restore windows excluded by the common 512-hour raw-context rule or identify their unobserved errors.
+
+**Table S5.** Equal-weight mean site MASE for ten wind zones in the common date range.
+
+| Model | Calendar only | Weather arm |
+|---|---:|---:|
+| LightGBM | 0.740 | 0.481 |
+| Chronos-2 | 0.744 | 0.643 |

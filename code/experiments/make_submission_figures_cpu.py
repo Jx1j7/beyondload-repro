@@ -11,6 +11,7 @@ ROOT = Path(__file__).resolve().parents[2]
 OUT = ROOT / "paper/submission/figures"
 BLUE = "#136f87"
 ORANGE = "#b75a3a"
+matplotlib.rcParams["ps.fonttype"] = 42
 
 
 def save(fig, stem):
@@ -104,8 +105,31 @@ def hourly_information():
     save(fig, "Figure_S2_hourly_information")
 
 
+def horizon_profile():
+    data = pd.read_csv(ROOT / "experiments/competition_aligned_cpu/horizon_summary.csv")
+    fig, axes = plt.subplots(1, 2, figsize=(8.2, 3.35), sharey=False)
+    for ax, track in zip(axes, ("wind", "solar")):
+        frame = data.loc[data.track.eq(track)]
+        for model, color in (("LightGBM", BLUE), ("Chronos-2", ORANGE)):
+            for arm, style in (("calendar", "--"), ("weather", "-")):
+                line = frame.loc[frame.model.eq(model) & frame.arm.eq(arm)].set_index("horizon").reindex(range(1, 25))
+                ax.plot(line.index, line.mase, color=color, ls=style,
+                        lw=1.8, label=f"{model}: {arm}")
+        ax.set_title(f"{track.capitalize()} ({10 if track == 'wind' else 3} sites)")
+        ax.set_xlabel("Forecast horizon (h)")
+        ax.set_xticks([1, 6, 12, 18, 24])
+        ax.grid(color="#e4e8ea", linewidth=.7)
+        for spine in ("top", "right"):
+            ax.spines[spine].set_visible(False)
+    axes[0].set_ylabel("Site-mean MASE at scored hours")
+    axes[0].legend(frameon=False, fontsize=7.5, loc="upper left")
+    fig.tight_layout()
+    save(fig, "Figure_2_horizon_profile")
+
+
 if __name__ == "__main__":
     primary()
     ranks()
     hourly_information()
-    print(f"Wrote 3 figures in 4 formats to {OUT}")
+    horizon_profile()
+    print(f"Wrote 4 figures in 4 formats to {OUT}")
