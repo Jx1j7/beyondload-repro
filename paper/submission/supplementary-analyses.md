@@ -1,6 +1,6 @@
 # Supplementary analyses
 
-These results use older hourly-origin or site-level pilot protocols. They provide context only and are not pooled with the main daily comparison. All figures and tables here use the S prefix.
+Sections S1–S6 report older hourly-origin or site-level pilot protocols as context and are not pooled with the main daily comparison. Sections S7–S11 contain paired uncertainty and sensitivity analyses of the daily comparison, a source-clock audit, and a separate past-weather-only input ablation. All figures and tables here use the S prefix.
 
 ## S1. Retrospective hourly-origin comparison
 
