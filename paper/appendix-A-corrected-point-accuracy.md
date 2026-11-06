@@ -27,12 +27,12 @@ Scores are corrected MASE (lower is better): archived all-hour MAE for wind/load
 | 2 | 0.602 ± 0.004 (n=5) | 0.940 | 0.992 | 0.859 | 1.128 ± 0.064 (n=5) | 1.020 ± 0.013 (n=5) | 1.003 ± 0.004 (n=5) | 0.835 | 0.846 | 0.957 ± 0.007 (n=5) |
 | 3 | 0.601 ± 0.003 (n=5) | 0.934 | 1.002 | 0.883 | 1.154 ± 0.057 (n=5) | 1.179 ± 0.317 (n=5) | 0.977 ± 0.004 (n=5) | 0.854 | 0.872 | 0.967 ± 0.004 (n=5) |
 
-## Load (1 zones)
+## Load (1 zone)
 
 | Site | LightGBM+NWP | TTM | TimesFM | Moirai-2 | PatchTST | TimeMixer | DLinear | Chronos-2 | Chronos-Bolt | iTransformer |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
 | 1 | 0.378 ± 0.003 (n=5) | — | — | — | 0.960 ± 0.036 (n=5) | — | — | 0.947 | 0.756 | 1.420 ± 0.039 (n=5) |
 
-† Wind zone 3 has missing target intervals; the eligible-origin sets differ across model runners and context lengths. Its values are descriptive, not strictly paired model comparisons. The thirteen-site-dataset sensitivity test excluding this zone is reported in the main text and `experiments/metric_audit/report.md`.
+† Wind zone 3 has missing target intervals; the eligible-origin sets differ across model runners and context lengths. Its values are descriptive, not strictly paired model comparisons. The thirteen-site-dataset sensitivity test excluding this zone is reported in Supplementary Section S1 and `experiments/metric_audit/report.md`.
 
 The complete per-run corrected values, site denominator, and site-level mean CSVs remain in `experiments/metric_audit/`. The archive has no per-origin forecasts or errors, so hourly paired confidence intervals and a common-origin zone-3 test cannot be reconstructed without additional inference.
