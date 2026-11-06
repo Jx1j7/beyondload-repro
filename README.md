@@ -5,7 +5,7 @@ This repository preserves the code and numerical artifacts for a **post-hoc, com
 ## What is included
 
 - `code/experiments/`: experiment and audit source, including the four-arm daily comparison.
-- `experiments/competition_aligned_cpu/`: eligible daily origins, 156 point-forecast CSVs, site/origin scores, per-origin scored-hour counts, exploratory within-site paired intervals, horizon profiles, common-date sensitivity, capacity-normalized error summaries, and SHA-256 run manifests.
+- `experiments/competition_aligned_cpu/`: eligible daily origins, 156 primary point-forecast CSVs, 13 additional Chronos-2 past-weather-only prediction files, site/origin scores, exploratory within-site paired intervals, horizon profiles, common-date and metric-definition sensitivities, solar source-clock summaries, capacity-normalized errors, and SHA-256 run manifests.
 - `experiments/results.csv` and `experiments/metric_audit/`: original aggregate archive and the separately corrected metric audit. The archived file is unchanged (SHA-256 `de787fa9079cab02598904398344166142d832ac734ec918e0435999c275dea8`).
 - `paper/appendix-*.md`: per-site appendices from the archived analyses.
 - `paper/submission/`: the current supplementary analyses and Figures 1–2 / Figures S1–S2 in PNG, PDF, EPS, and SVG. The submitted manuscript itself is not included.
@@ -22,7 +22,7 @@ Use Python 3.11 or newer:
 python scripts/verify_release.py
 ```
 
-The expected result is 13 site-series, 1,635 shared daily forecast origins, 156 prediction files, and 39,240 shared observed target values. `experiments/competition_aligned_cpu/comparison_report.md` summarizes the corrected MASE results; `paper/appendix-B-competition-aligned.md` gives per-site scores. `paired_origin_losses.csv` includes `count`, the number of scored target hours per origin; weight solar origin MASE by this count to reconstruct site scores. `paired_site_intervals_method.md` records the exploratory block-bootstrap procedure and its limitations.
+The expected result is 13 site-series, 1,635 shared daily forecast origins, 156 primary prediction files, 13 past-weather-only prediction files, and 39,240 shared observed target values. `experiments/competition_aligned_cpu/comparison_report.md` summarizes the corrected MASE results; `paper/appendix-B-competition-aligned.md` gives per-site scores. `paired_origin_losses.csv` includes `count`, the number of scored target hours per origin; weight solar origin MASE by this count to reconstruct site scores. `paired_site_intervals_method.md` records the exploratory block-bootstrap procedure and its limitations.
 
 The current Figures 1–2 and supplementary Figures S1–S2 can be regenerated after installing `requirements-core.txt` with:
 
@@ -30,7 +30,7 @@ The current Figures 1–2 and supplementary Figures S1–S2 can be regenerated a
 .venv/bin/python code/experiments/make_submission_figures_cpu.py
 ```
 
-The figures read `paired_per_site.csv`, `horizon_summary.csv`, `corrected_per_site.csv`, and `per_site_comparison.csv`. Generate the post-hoc horizon and sensitivity tables first with `code/experiments/derive_submission_sensitivities_cpu.py`; this reads the archived point forecasts and does not run either model. Figure S1 is descriptive; no significance bar is plotted. Figure S2 shows unconnected points because its two arms need not have identical eligible origins. Earlier figure-generating scripts remain as historical research code, but their superseded outputs are omitted from this release.
+The figures read `paired_per_site.csv`, `horizon_summary.csv`, `corrected_per_site.csv`, and `per_site_comparison.csv`. Generate the post-hoc horizon and sensitivity tables first with `code/experiments/derive_submission_sensitivities_cpu.py`; this reads the archived point forecasts and does not run either model. The metric-definition sensitivity is rebuilt with `derive_metric_definition_sensitivity_cpu.py`, and the solar source-clock audit with `derive_solar_clock_profile_cpu.py` after preparing the source data. Figure S1 is descriptive; no significance bar is plotted. Figure S2 shows unconnected points because its two arms need not have identical eligible origins. Earlier figure-generating scripts remain as historical research code, but their superseded outputs are omitted from this release.
 
 ## Reproduce the CPU comparison from source data
 
@@ -51,13 +51,17 @@ python3.11 -m venv .venv
 .venv/bin/python -c "from huggingface_hub import snapshot_download; snapshot_download('amazon/chronos-2', revision='29ec3766d36d6f73f0696f85560a422f50e8498c')"
 ```
 
-4. Run the analysis in this order. All inference runs on CPU; the archived Chronos-2 run took about 12 minutes and LightGBM about 5 minutes on the recorded macOS host. Run times vary by machine. These scripts write into the archived output directory; use a fresh checkout if you want to retain the bundled point forecasts untouched.
+4. Run the analysis in this order. All inference runs on CPU; the archived two-arm Chronos-2 run took about 12 minutes and the additional past-weather-only arm about 5.5 minutes on the recorded macOS host. LightGBM took about 5 minutes. Run times vary by machine. These scripts write into the archived output directory; use a fresh checkout if you want to retain the bundled point forecasts untouched.
 
 ```bash
 .venv/bin/python code/experiments/audit_competition_issue_schedule_cpu.py
 .venv/bin/python code/experiments/run_competition_lightgbm_cpu.py
 .venv/bin/python code/experiments/run_competition_chronos2_cpu.py
 .venv/bin/python code/experiments/analyze_competition_aligned_cpu.py
+.venv/bin/python code/experiments/run_competition_chronos2_past_weather_cpu.py
+.venv/bin/python code/experiments/analyze_chronos2_past_weather_cpu.py
+.venv/bin/python code/experiments/derive_metric_definition_sensitivity_cpu.py
+.venv/bin/python code/experiments/derive_solar_clock_profile_cpu.py
 .venv/bin/python code/experiments/make_competition_figure_cpu.py
 .venv/bin/python code/experiments/build_competition_appendix_cpu.py
 ```
@@ -68,7 +72,7 @@ The new scripts write outside the original `experiments/results.csv`. For the ar
 
 The daily origin starts at 01:00 and covers the next 24 target hours. GEFCom2014's paper says NWP was issued at midnight, and the source weather records appear in matching daily 01:00–next-day 00:00 blocks. The files do not contain explicit per-record issue times or forecast vintages. Eligible test windows require the preceding 512 hours and following 24 hours of **raw** target values, plus complete weather fields, so target interpolation cannot affect their context or scoring window.
 
-Both models receive target history and known future calendar. The NWP arms both receive the next 24 hours' weather fields. Chronos-2 additionally receives past weather through `future_df`'s matching past covariates; LightGBM uses target-hour weather features. Consequently, the Chronos-2 weather-minus-calendar improvement cannot isolate the value of future NWP alone. Context length, model training, and feature representation are different. Wind zones come from one competition source, and there are only three solar sites. Results are descriptive for these sites. The source-file time zone and local clock alignment are not independently verified.
+Both models receive target history and known future calendar. The NWP arms both receive the next 24 hours' weather fields. Chronos-2 additionally receives past weather through `past_df`; LightGBM uses target-hour weather features. The extra Chronos-2 past-weather-only arm holds future calendar and historical weather fixed while omitting future NWP, so its contrast with the full-weather arm isolates an input change within this fixed model and dataset. It does not verify operational forecast vintages. Context length, model training, and feature representation differ across models. Wind zones come from one competition source, and there are only three solar sites. Results are descriptive for these sites. The source-file time zone and local clock alignment are not independently verified; power at source-file 00:00 is above the 1% threshold in over 99% of observed solar records.
 
 The old `chronos2+cov;step=24` rows in `experiments/results.csv` are **not** future-NWP evidence: the old API call did not pass `future_df`. The daily comparison uses the correct API and pins checkpoint revision `29ec3766d36d6f73f0696f85560a422f50e8498c`.
 

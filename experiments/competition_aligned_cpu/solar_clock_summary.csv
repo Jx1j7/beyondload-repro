@@ -1,0 +1,4 @@
+dataset,circular_power_centroid_hour,source_midnight_mean_power,source_midnight_active_fraction
+gefcom2014_solar_zone1,1.9532750851241854,0.5340657109841032,1.0
+gefcom2014_solar_zone2,3.037376880792894,0.40503348340869977,1.0
+gefcom2014_solar_zone3,2.0478821535013196,0.5628415956151035,0.9939098660170523

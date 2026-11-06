@@ -53,7 +53,27 @@ def main() -> None:
             assert set(observed) == origins[dataset]
             assert all(len(steps) == 24 for steps in observed.values())
     assert len(actuals) == EXPECTED_ORIGINS * 24
-    print("PASS: 13 sites, 1,635 common origins, 156 prediction files, 39,240 shared targets")
+    past_dir = ROOT / "chronos2_past_weather"
+    past_files = sorted(past_dir.glob("*_past_weather_points.csv"))
+    assert len(past_files) == 13, len(past_files)
+    past_manifest = (past_dir / "run_manifest.md").read_text()
+    for file in past_files:
+        assert f"`{file.name}` | `{sha(file)}`" in past_manifest, file.name
+        dataset = file.name.removesuffix("_past_weather_points.csv")
+        assert dataset in origins
+        seen = defaultdict(set)
+        with file.open() as f:
+            for row in csv.DictReader(f):
+                origin = int(row["origin_index"])
+                step = int(row["horizon_step"])
+                assert origin in origins[dataset] and 1 <= step <= 24
+                assert step not in seen[origin]
+                seen[origin].add(step)
+                assert (row["target_timestamp"], float(row["actual"])) == actuals[(dataset, origin, step)]
+                assert math.isfinite(float(row["prediction"]))
+        assert set(seen) == origins[dataset]
+        assert all(len(steps) == 24 for steps in seen.values())
+    print("PASS: 13 sites, 1,635 common origins, 156 primary + 13 past-weather prediction files, 39,240 shared targets")
 
 
 if __name__ == "__main__":

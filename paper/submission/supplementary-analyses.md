@@ -103,3 +103,62 @@ This descriptive restriction keeps already-eligible wind origins whose source-fi
 |---|---:|---:|
 | LightGBM | 0.740 | 0.481 |
 | Chronos-2 | 0.744 | 0.643 |
+
+
+## S9. Metric-definition sensitivity on the same daily predictions
+
+The original implementation used a test-period 24-hour seasonal-naïve denominator and an observed-power >1% mask on wind as well as solar. Table S6 reconstructs that definition on exactly the same saved daily predictions and eligible origins as Table 3; it is not an archived hourly score. Each LightGBM seed is scored separately before averaging. Under both definitions, LightGBM has the lower weather-arm MASE at all thirteen sites. In the calendar arms, wind zone 8 alone changes the sign of the within-site model gap (five LightGBM site wins under the original rule versus four after correction). The script `code/experiments/derive_metric_definition_sensitivity_cpu.py` records the exact original denominator call and scoring mask.
+
+**Table S6.** Equal-weight site-mean MASE on the frozen daily predictions under the corrected and reconstructed original metric rules.
+
+| Track | Model | Arm | Corrected | Original rule reconstructed |
+|---|---|---|---:|---:|
+| wind | LightGBM | calendar | 0.817 | 0.716 |
+| wind | LightGBM | weather | 0.477 | 0.412 |
+| wind | Chronos-2 | calendar | 0.813 | 0.712 |
+| wind | Chronos-2 | weather | 0.648 | 0.578 |
+| solar | LightGBM | calendar | 0.798 | 0.800 |
+| solar | LightGBM | weather | 0.573 | 0.574 |
+| solar | Chronos-2 | calendar | 0.720 | 0.722 |
+| solar | Chronos-2 | weather | 0.649 | 0.650 |
+
+## S10. Source-file solar clock audit
+
+The circular centroid is computed from the 24 hourly mean powers in the processed solar series, weighting each hour by its mean normalized power. It describes the source-file cycle, not solar noon or a civil time zone; panel orientation, clouds, clipping and curtailment can shift the power centroid. The source files do not record the local civil clock or individual NWP issue instants.
+
+**Table S7.** Solar production timing in the source-file time coordinate.
+
+| Solar site | Circular power centroid (hour) | Mean power at 00:00 | Active at 00:00 |
+|---|---:|---:|---:|
+| solar site 1 | 1.95 | 0.534 | 100.0% |
+| solar site 2 | 3.04 | 0.405 | 100.0% |
+| solar site 3 | 2.05 | 0.563 | 99.4% |
+
+## S11. Post-hoc past-weather-only Chronos-2 arm
+
+The pinned Chronos-2 checkpoint was rerun on the same 1,635 eligible daily origins using CPU. Target history and future calendar are unchanged. Past NWP fields appear only in the historical input; the future input contains calendar but no NWP. The archived full-weather arm contains both historical and future NWP. The contrast is a within-model input ablation, not a matched comparison of training regimes or independently timestamped weather vintages. The run manifest and all thirteen new point-forecast files are retained in `experiments/competition_aligned_cpu/chronos2_past_weather/`.
+
+**Table S8.** Equal-weight site-mean Chronos-2 MASE (lower is better). Future increment is the relative reduction from past-weather-only to past-and-future weather.
+
+| Track | Calendar only | Past weather only | Past + future weather | Future increment |
+|---|---:|---:|---:|---:|
+| wind | 0.813 | 0.799 | 0.648 | 18.9% |
+| solar | 0.720 | 0.708 | 0.649 | 8.4% |
+
+**Table S9.** Per-site Chronos-2 MASE for the fixed-origin input ablation.
+
+| Site | Origin days | Calendar only | Past weather only | Past + future weather |
+|---|---:|---:|---:|---:|
+| solar zone 1 | 157 | 0.749 | 0.734 | 0.687 |
+| solar zone 2 | 157 | 0.695 | 0.688 | 0.634 |
+| solar zone 3 | 157 | 0.716 | 0.702 | 0.626 |
+| wind zone 1 | 52 | 0.825 | 0.824 | 0.704 |
+| wind zone 10 | 138 | 0.836 | 0.833 | 0.682 |
+| wind zone 2 | 86 | 0.824 | 0.804 | 0.672 |
+| wind zone 3 | 60 | 0.690 | 0.679 | 0.575 |
+| wind zone 4 | 138 | 0.833 | 0.802 | 0.598 |
+| wind zone 5 | 138 | 0.858 | 0.834 | 0.669 |
+| wind zone 6 | 138 | 0.812 | 0.796 | 0.637 |
+| wind zone 7 | 138 | 0.831 | 0.823 | 0.642 |
+| wind zone 8 | 138 | 0.821 | 0.810 | 0.669 |
+| wind zone 9 | 138 | 0.795 | 0.785 | 0.628 |
