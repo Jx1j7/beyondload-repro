@@ -162,3 +162,7 @@ The pinned Chronos-2 checkpoint was rerun on the same 1,635 eligible daily origi
 | wind zone 7 | 138 | 0.831 | 0.823 | 0.642 |
 | wind zone 8 | 138 | 0.821 | 0.810 | 0.669 |
 | wind zone 9 | 138 | 0.795 | 0.785 | 0.628 |
+
+## Supplementary reference
+
+[23] C. Xu and Y. Xie, "Conformal prediction interval for dynamic time-series," in *ICML*, PMLR 139, pp. 11559–11569, 2021.

@@ -24,6 +24,8 @@ python scripts/verify_release.py
 
 The expected result is 13 site-series, 1,635 shared daily forecast origins, 156 primary prediction files, 13 past-weather-only prediction files, and 39,240 shared observed target values. `experiments/competition_aligned_cpu/comparison_report.md` summarizes the corrected MASE results; `paper/appendix-B-competition-aligned.md` gives per-site scores. `paired_origin_losses.csv` includes `count`, the number of scored target hours per origin; weight solar origin MASE by this count to reconstruct site scores. `paired_site_intervals_method.md` records the exploratory block-bootstrap procedure and its limitations.
 
+The release verifier checks the archived prediction files, their manifests, shared targets, and the original aggregate archive. It does not independently recompute every derived score table, report, or figure; use the analysis commands below for those checks.
+
 The current Figures 1–2 and supplementary Figures S1–S2 can be regenerated after installing `requirements-core.txt` with:
 
 ```bash
@@ -60,9 +62,12 @@ python3.11 -m venv .venv
 .venv/bin/python code/experiments/analyze_competition_aligned_cpu.py
 .venv/bin/python code/experiments/run_competition_chronos2_past_weather_cpu.py
 .venv/bin/python code/experiments/analyze_chronos2_past_weather_cpu.py
+.venv/bin/python code/experiments/paired_daily_uncertainty_cpu.py
+.venv/bin/python code/experiments/derive_submission_sensitivities_cpu.py
 .venv/bin/python code/experiments/derive_metric_definition_sensitivity_cpu.py
 .venv/bin/python code/experiments/derive_solar_clock_profile_cpu.py
 .venv/bin/python code/experiments/make_competition_figure_cpu.py
+.venv/bin/python code/experiments/make_submission_figures_cpu.py
 .venv/bin/python code/experiments/build_competition_appendix_cpu.py
 ```
 
@@ -73,6 +78,8 @@ The new scripts write outside the original `experiments/results.csv`. For the ar
 The daily origin starts at 01:00 and covers the next 24 target hours. GEFCom2014's paper says NWP was issued at midnight, and the source weather records appear in matching daily 01:00–next-day 00:00 blocks. The files do not contain explicit per-record issue times or forecast vintages. Eligible test windows require the preceding 512 hours and following 24 hours of **raw** target values, plus complete weather fields, so target interpolation cannot affect their context or scoring window.
 
 Both models receive target history and known future calendar. The NWP arms both receive the next 24 hours' weather fields. Chronos-2 additionally receives past weather through `past_df`; LightGBM uses target-hour weather features. The extra Chronos-2 past-weather-only arm holds future calendar and historical weather fixed while omitting future NWP, so its contrast with the full-weather arm isolates an input change within this fixed model and dataset. It does not verify operational forecast vintages. Context length, model training, and feature representation differ across models. Wind zones come from one competition source, and there are only three solar sites. Results are descriptive for these sites. The source-file time zone and local clock alignment are not independently verified; power at source-file 00:00 is above the 1% threshold in over 99% of observed solar records.
+
+LightGBM early stopping uses one-step validation rows with observed target lags, while its 24-hour test forecasts recursively use prior predictions. The effect of selecting iterations with recursive validation loss was not tested.
 
 The old `chronos2+cov;step=24` rows in `experiments/results.csv` are **not** future-NWP evidence: the old API call did not pass `future_df`. The daily comparison uses the correct API and pins checkpoint revision `29ec3766d36d6f73f0696f85560a422f50e8498c`.
 
